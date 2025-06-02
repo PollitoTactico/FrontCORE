@@ -215,14 +215,19 @@ export function ProfilePage() {
           required
           className="border p-2 w-full"
         />
-        <input
-          type="text"
-          placeholder="Empresa"
+        <select
+          aria-label="Empresa"
           value={formData.Empresa}
           onChange={(e) => setFormData({ ...formData, Empresa: e.target.value })}
           required
           className="border p-2 w-full"
-        />
+        >
+          <option value="">Seleccione una empresa</option>
+          <option value="SG CONSULTING">SG CONSULTING</option>
+          <option value="EMPORIUM">EMPORIUM</option>
+          <option value="INCOOP">INCOOP</option>
+          <option value="ADWA">ADWA</option>
+        </select>
         <input
           type="text"
           placeholder="Título Cargo"
@@ -239,14 +244,19 @@ export function ProfilePage() {
           required
           className="border p-2 w-full"
         />
-        <input
-          type="text"
-          placeholder="Formación Académica"
+        <select
+          aria-label="Formación Académica"
           value={formData.FormacionAcademica}
           onChange={(e) => setFormData({ ...formData, FormacionAcademica: e.target.value })}
           required
           className="border p-2 w-full"
-        />
+        >
+          <option value="">Seleccione formación académica</option>
+          <option value="Bachillerato">Bachillerato</option>
+          <option value="Licenciatura">Licenciatura</option>
+          <option value="Maestría">Maestría</option>
+          <option value="Doctorado">Doctorado</option>
+        </select>
         <input
           type="text"
           placeholder="Conocimientos Cargo"
