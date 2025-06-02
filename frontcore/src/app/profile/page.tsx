@@ -25,7 +25,7 @@ export default function ProfilePage() {
       return;
     }
 
-    fetch(`http://backendcrudapiservice20250420164400.azurewebsites.net/api/Users`)
+    fetch(`http:/backendcrudapiservice20250420164400.azurewebsites.net/api/Users`)
       .then(res => res.json())
       .then((users: User[]) => {
         const foundUser = users.find(u => u.email === email);
