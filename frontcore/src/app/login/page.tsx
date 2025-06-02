@@ -17,12 +17,13 @@ export default function LoginPage() {
     });
 
     if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem('token', data.token);
-      setMessage('Inicio de sesión exitoso.');
-      // Redirigir a la página de perfil o donde sea necesario
-      window.location.href = '/profile';
-    } else {
+    const data = await response.json();
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('email', email);
+    setMessage('Inicio de sesión exitoso.');
+    window.location.href = '/profile';
+    }
+    else {
       setMessage('Credenciales incorrectas.');
     }
   };
