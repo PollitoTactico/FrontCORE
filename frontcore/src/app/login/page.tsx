@@ -20,6 +20,8 @@ export default function LoginPage() {
       const data = await response.json();
       localStorage.setItem('token', data.token);
       setMessage('Inicio de sesión exitoso.');
+      // Redirigir a la página de perfil o donde sea necesario
+      window.location.href = '/profile';
     } else {
       setMessage('Credenciales incorrectas.');
     }

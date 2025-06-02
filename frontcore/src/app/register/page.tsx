@@ -21,7 +21,7 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch('http://backendcrudapiservice20250420164400.azurewebsites.net/api/Auth/register', {
+    const res = await fetch('http://backendcrudapiservice20250420164400.azurewebsites.net/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
