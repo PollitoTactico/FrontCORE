@@ -176,7 +176,7 @@ export default function AdminPanel() {
   );
 }
 
-export function ProfilePage() {
+function ProfilePage() {
   const [formData, setFormData] = useState<FormData>({
     NombrePerfil: '',
     MisionCargo: '',
