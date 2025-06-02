@@ -17,7 +17,7 @@ export default function VerifyPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch('http://backendcrudapiservice20250420164400.azurewebsites.net/api/Auth/verify', {
+    const res = await fetch('https://backendcrudapiservice20250420164400.azurewebsites.net/api/Auth/verify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token: code }),
