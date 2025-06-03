@@ -33,7 +33,7 @@ export default function CrudProfilePage() {
       const data: ProfileUser[] = await response.json();
       setProfiles(data);
     } catch (error) {
-      setNotification("Error al cargar los perfiles.");
+      setNotification(`Error al cargar los perfiles: ${error}`);
     }
   };
 
@@ -53,7 +53,7 @@ export default function CrudProfilePage() {
         setNotification("Error al eliminar el perfil.");
       }
     } catch (error) {
-      setNotification("Error de conexión al eliminar el perfil.");
+      setNotification(`Error en la conexion al eliminar el perfil: ${error}`);
     }
   };
 
@@ -80,7 +80,7 @@ export default function CrudProfilePage() {
         setNotification(`Error al actualizar el perfil: ${errorMessage}`);
       }
     } catch (error) {
-      setNotification("Error de conexión al actualizar el perfil.");
+      setNotification(`Error al actualizar el perfil: ${error}`);
     }
   };
 

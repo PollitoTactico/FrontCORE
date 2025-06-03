@@ -155,7 +155,7 @@ export function ProfilePage() {
         setNotification(`Error al guardar el perfil: ${errorMessage}`);
       }
     } catch (error) {
-      setNotification('Error de conexión al guardar el perfil.');
+      setNotification (`Error al guardar el perfil: ${error}`)
     }
   };
 

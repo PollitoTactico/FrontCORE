@@ -35,7 +35,7 @@ export default function UploadPage() {
         setNotification(`Error: ${errorMessage}`);
       }
     } catch (error) {
-      setNotification('Error de conexión al subir el archivo.');
+      setNotification(`Error al subir el archivo: ${error}`);
     }
   };
 
