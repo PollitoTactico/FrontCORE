@@ -20,7 +20,7 @@ interface ComparationResponse {
   results: ComparationResult[];
 }
 
-export default function ComparePage() { // Cambiado a exportación por defecto
+export default function ComparePage() {
   const [requestData, setRequestData] = useState({
     profileId: '',
     cvIds: '',
