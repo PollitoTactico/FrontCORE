@@ -28,7 +28,7 @@ interface FormData {
   ConocimientoTecnologico: string;
 }
 
-function AdminPanel() {
+export function AdminPanel() {
   const [users, setUsers] = useState<User[]>([]);
   const [formData, setFormData] = useState<FormData>({
     NombrePerfil: '',
@@ -176,7 +176,7 @@ function AdminPanel() {
   );
 }
 
-function ProfilePage() {
+export default function ProfilePage() {
   const [formData, setFormData] = useState<FormData>({
     NombrePerfil: '',
     MisionCargo: '',
@@ -189,10 +189,39 @@ function ProfilePage() {
     FuncionesEsenciales: '',
     ConocimientoTecnologico: '',
   });
+  const [notification, setNotification] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const response = await fetch('https://backendcrudapiservice20250420164400.azurewebsites.net/api/ProfileUser', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json(); // Obtener el ID del perfil creado
+        setNotification(`Perfil guardado correctamente. ID: ${data.id}`);
+        setFormData({
+          NombrePerfil: '',
+          MisionCargo: '',
+          Empresa: '',
+          TituloCargo: '',
+          Departamento: '',
+          FormacionAcademica: '',
+          ConocimientosCargo: '',
+          Experiencia: '',
+          FuncionesEsenciales: '',
+          ConocimientoTecnologico: '',
+        });
+      } else {
+        const errorMessage = await response.text();
+        setNotification(`Error al guardar el perfil: ${errorMessage}`);
+      }
+    } catch (error) {
+      setNotification('Error de conexión al guardar el perfil.');
+    }
   };
 
   return (
@@ -291,6 +320,7 @@ function ProfilePage() {
         />
         <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Guardar</button>
       </form>
+      {notification && <p className="mt-4 text-green-500">{notification}</p>}
     </div>
   );
 }

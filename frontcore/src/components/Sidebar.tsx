@@ -18,6 +18,7 @@ export default function Sidebar() {
         <Link href="/profile" className={linkStyle('/profile')}>Perfil de Usuario</Link>
         <Link href="/upload" className={linkStyle('/upload')}>Carga de PDFs</Link>
         <Link href="/compare" className={linkStyle('/compare')}>Comparación</Link>
+        <Link href="/crudprofile" className={linkStyle('/crudprofile')}>CRUDProfile</Link>
       </nav>
     </aside>
   );
