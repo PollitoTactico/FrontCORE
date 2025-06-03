@@ -1,4 +1,5 @@
-'use client';
+"use client";
+
 import { useState, useEffect } from 'react';
 
 interface User {
@@ -177,7 +178,7 @@ export function AdminPanel() {
 }
 
 export default function ProfilePage() {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     NombrePerfil: '',
     MisionCargo: '',
     Empresa: '',
@@ -201,7 +202,7 @@ export default function ProfilePage() {
       });
 
       if (response.ok) {
-        const data = await response.json(); // Obtener el ID del perfil creado
+        const data = await response.json();
         setNotification(`Perfil guardado correctamente. ID: ${data.id}`);
         setFormData({
           NombrePerfil: '',
@@ -217,7 +218,7 @@ export default function ProfilePage() {
         });
       } else {
         const errorMessage = await response.text();
-        setNotification(`Error al guardar el perfil: ${errorMessage}`); 
+        setNotification(`Error al guardar el perfil: ${errorMessage}`);
       }
     } catch (error) {
       setNotification(`Error al guardar el perfil: ${error}`);
@@ -244,19 +245,6 @@ export default function ProfilePage() {
           required
           className="border p-2 w-full"
         />
-        <select
-          aria-label="Empresa"
-          value={formData.Empresa}
-          onChange={(e) => setFormData({ ...formData, Empresa: e.target.value })}
-          required
-          className="border p-2 w-full"
-        >
-          <option value="">Seleccione una empresa</option>
-          <option value="SG CONSULTING">SG CONSULTING</option>
-          <option value="EMPORIUM">EMPORIUM</option>
-          <option value="INCOOP">INCOOP</option>
-          <option value="ADWA">ADWA</option>
-        </select>
         <input
           type="text"
           placeholder="Título Cargo"

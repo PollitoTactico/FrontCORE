@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 interface KeywordWeight {
   keyword: string;
@@ -13,6 +13,7 @@ interface ComparationResult {
   matchPercentage: number;
   matchedKeywords: KeywordWeight[];
   profileKeywords: KeywordWeight[];
+  frequentWords: KeywordWeight[];
 }
 
 interface ComparationResponse {
@@ -22,39 +23,42 @@ interface ComparationResponse {
 
 export default function ComparePage() {
   const [requestData, setRequestData] = useState({
-    profileId: '',
-    cvIds: '',
+    profileId: "",
+    cvIds: "",
   });
   const [result, setResult] = useState<ComparationResponse | null>(null);
-  const [notification, setNotification] = useState('');
+  const [notification, setNotification] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const cvIdsArray = requestData.cvIds.split(',').map((id) => parseInt(id.trim(), 10));
+    const cvIdsArray = requestData.cvIds.split(",").map((id) => parseInt(id.trim(), 10));
 
     if (cvIdsArray.some(isNaN)) {
-      setNotification('Error: Los IDs de CVs deben ser números separados por comas.');
+      setNotification("Error: Los IDs de CVs deben ser números separados por comas.");
       return;
     }
 
     try {
-      const response = await fetch('https://backendcrudapiservice20250420164400.azurewebsites.net/api/Comparation/compare', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ profileId: requestData.profileId, cvIds: cvIdsArray }),
-      });
+      const response = await fetch(
+        "https://backendcrudapiservice20250420164400.azurewebsites.net/api/comparation/compare",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ profileId: requestData.profileId, cvIds: cvIdsArray }),
+        }
+      );
 
       if (response.ok) {
         const data: ComparationResponse = await response.json();
         setResult(data);
-        setNotification('Comparación realizada correctamente.');
+        setNotification("Comparación realizada correctamente.");
       } else {
         const errorMessage = await response.text();
         setNotification(`Error: ${errorMessage}`);
       }
     } catch {
-      setNotification('Error de conexión al realizar la comparación.');
+      setNotification("Error de conexión al realizar la comparación.");
     }
   };
 
@@ -78,7 +82,9 @@ export default function ComparePage() {
           required
           className="border p-2 w-full"
         />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Comparar</button>
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+          Comparar
+        </button>
       </form>
       {notification && <p className="mt-4 text-green-500">{notification}</p>}
       {result && (
@@ -96,12 +102,22 @@ export default function ComparePage() {
                 <strong>Porcentaje de Coincidencia:</strong> {cvResult.matchPercentage}%
               </p>
               <p>
-                <strong>Palabras Clave Coincidentes:</strong>{' '}
-                {cvResult.matchedKeywords.map((kw) => `${kw.keyword} (${kw.weight})`).join(', ')}
+                <strong>Palabras Clave Coincidentes:</strong>{" "}
+                {cvResult.matchedKeywords.map((kw, index) => (
+                  <span key={`${kw.keyword}-${index}`}>{kw.keyword} ({kw.weight}), </span>
+                ))}
               </p>
               <p>
-                <strong>Palabras Clave del Perfil:</strong>{' '}
-                {cvResult.profileKeywords.map((kw) => `${kw.keyword} (${kw.weight})`).join(', ')}
+                <strong>Palabras Clave del Perfil:</strong>{" "}
+                {cvResult.profileKeywords.map((kw, index) => (
+                  <span key={`${kw.keyword}-${index}`}>{kw.keyword} ({kw.weight}), </span>
+                ))}
+              </p>
+              <p>
+                <strong>Palabras Frecuentes:</strong>{" "}
+                {cvResult.frequentWords.map((kw, index) => (
+                  <span key={`${kw.keyword}-${index}`}>{kw.keyword} ({kw.weight}), </span>
+                ))}
               </p>
             </div>
           ))}
