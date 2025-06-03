@@ -53,7 +53,7 @@ export default function ComparePage() { // Cambiado a exportación por defecto
         const errorMessage = await response.text();
         setNotification(`Error: ${errorMessage}`);
       }
-    } catch (error) {
+    } catch {
       setNotification('Error de conexión al realizar la comparación.');
     }
   };
