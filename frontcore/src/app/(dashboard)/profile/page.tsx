@@ -28,7 +28,7 @@ interface FormData {
   ConocimientoTecnologico: string;
 }
 
-export default function AdminPanel() {
+function AdminPanel() {
   const [users, setUsers] = useState<User[]>([]);
   const [formData, setFormData] = useState<FormData>({
     NombrePerfil: '',
