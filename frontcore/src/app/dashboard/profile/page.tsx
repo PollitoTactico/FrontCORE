@@ -59,84 +59,87 @@ export default function ProfilePage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
-            placeholder="Nombre Perfil"
+            placeholder="Nombre del Perfil"
             value={formData.NombrePerfil}
             onChange={(e) => setFormData({ ...formData, NombrePerfil: e.target.value })}
-            required
             className="border p-2 w-full"
+            required
           />
           <input
             type="text"
-            placeholder="Misión Cargo"
+            placeholder="Misión del Cargo"
             value={formData.MisionCargo}
             onChange={(e) => setFormData({ ...formData, MisionCargo: e.target.value })}
-            required
             className="border p-2 w-full"
+            required
           />
           <input
             type="text"
-            placeholder="Título Cargo"
+            placeholder="Empresa"
+            value={formData.Empresa}
+            onChange={(e) => setFormData({ ...formData, Empresa: e.target.value })}
+            className="border p-2 w-full"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Título del Cargo"
             value={formData.TituloCargo}
             onChange={(e) => setFormData({ ...formData, TituloCargo: e.target.value })}
-            required
             className="border p-2 w-full"
+            required
           />
           <input
             type="text"
             placeholder="Departamento"
             value={formData.Departamento}
             onChange={(e) => setFormData({ ...formData, Departamento: e.target.value })}
-            required
             className="border p-2 w-full"
+            required
           />
-          <select
-            aria-label="Formación Académica"
-            value={formData.FormacionAcademica}
-            onChange={(e) => setFormData({ ...formData, FormacionAcademica: e.target.value })}
-            required
-            className="border p-2 w-full"
-          >
-            <option value="">Seleccione formación académica</option>
-            <option value="Bachillerato">Bachillerato</option>
-            <option value="Licenciatura">Licenciatura</option>
-            <option value="Maestría">Maestría</option>
-            <option value="Doctorado">Doctorado</option>
-          </select>
           <input
             type="text"
-            placeholder="Conocimientos Cargo"
+            placeholder="Formación Académica"
+            value={formData.FormacionAcademica}
+            onChange={(e) => setFormData({ ...formData, FormacionAcademica: e.target.value })}
+            className="border p-2 w-full"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Conocimientos del Cargo"
             value={formData.ConocimientosCargo}
             onChange={(e) => setFormData({ ...formData, ConocimientosCargo: e.target.value })}
-            required
             className="border p-2 w-full"
+            required
           />
           <input
             type="text"
             placeholder="Experiencia"
             value={formData.Experiencia}
             onChange={(e) => setFormData({ ...formData, Experiencia: e.target.value })}
-            required
             className="border p-2 w-full"
+            required
           />
           <input
             type="text"
             placeholder="Funciones Esenciales"
             value={formData.FuncionesEsenciales}
             onChange={(e) => setFormData({ ...formData, FuncionesEsenciales: e.target.value })}
-            required
             className="border p-2 w-full"
+            required
           />
           <input
             type="text"
             placeholder="Conocimiento Tecnológico"
             value={formData.ConocimientoTecnologico}
             onChange={(e) => setFormData({ ...formData, ConocimientoTecnologico: e.target.value })}
-            required
             className="border p-2 w-full"
+            required
           />
           <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Guardar</button>
         </form>
-        {notification && <p className="mt-4 text-green-500">{notification}</p>}
+        {notification && <div className="mt-4 text-red-600">{notification}</div>}
       </div>
     </>
   );

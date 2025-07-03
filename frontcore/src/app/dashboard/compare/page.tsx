@@ -57,68 +57,65 @@ export default function ComparePage() {
         const errorMessage = await response.text();
         setNotification(`Error: ${errorMessage}`);
       }
-    } catch {
-      setNotification("Error de conexión al realizar la comparación.");
+    } catch (error) {
+      setNotification(`Error en la comparación: ${error}`);
     }
   };
 
   return (
     <div className="p-8 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Comparación de Perfiles</h1>
+      <h2 className="text-2xl font-bold mb-4">Comparar CVs con Perfil</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           placeholder="ID del Perfil"
           value={requestData.profileId}
           onChange={(e) => setRequestData({ ...requestData, profileId: e.target.value })}
-          required
           className="border p-2 w-full"
+          required
         />
         <input
           type="text"
-          placeholder="IDs de CVs (separados por comas)"
+          placeholder="IDs de CVs (separados por coma)"
           value={requestData.cvIds}
           onChange={(e) => setRequestData({ ...requestData, cvIds: e.target.value })}
-          required
           className="border p-2 w-full"
+          required
         />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
-          Comparar
-        </button>
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Comparar</button>
       </form>
-      {notification && <p className="mt-4 text-green-500">{notification}</p>}
+      {notification && <div className="mt-4 text-red-600">{notification}</div>}
       {result && (
-        <div className="mt-4">
-          <h2 className="text-xl font-bold">Resultados para el perfil: {result.profileName}</h2>
-          {result.results.map((cvResult) => (
-            <div key={cvResult.cvId} className="bg-gray-100 p-4 rounded mb-4">
-              <p>
-                <strong>CV ID:</strong> {cvResult.cvId}
-              </p>
-              <p>
-                <strong>Nombre del CV:</strong> {cvResult.cvName}
-              </p>
-              <p>
-                <strong>Porcentaje de Coincidencia:</strong> {cvResult.matchPercentage}%
-              </p>
-              <p>
-                <strong>Palabras Clave Coincidentes:</strong>{" "}
-                {cvResult.matchedKeywords.map((kw, index) => (
-                  <span key={`${kw.keyword}-${index}`}>{kw.keyword} ({kw.weight}), </span>
-                ))}
-              </p>
-              <p>
-                <strong>Palabras Clave del Perfil:</strong>{" "}
-                {cvResult.profileKeywords.map((kw, index) => (
-                  <span key={`${kw.keyword}-${index}`}>{kw.keyword} ({kw.weight}), </span>
-                ))}
-              </p>
-              <p>
-                <strong>Palabras Frecuentes:</strong>{" "}
-                {cvResult.frequentWords.map((kw, index) => (
-                  <span key={`${kw.keyword}-${index}`}>{kw.keyword} ({kw.weight}), </span>
-                ))}
-              </p>
+        <div className="mt-8">
+          <h3 className="text-xl font-semibold mb-2">Resultado para perfil: {result.profileName}</h3>
+          {result.results.map((res) => (
+            <div key={res.cvId} className="mb-4 p-4 border rounded bg-white">
+              <h4 className="font-bold">CV: {res.cvName} (ID: {res.cvId})</h4>
+              <p>Porcentaje de coincidencia: {res.matchPercentage}%</p>
+              <div>
+                <strong>Palabras clave coincidentes:</strong>
+                <ul>
+                  {res.matchedKeywords.map((kw, idx) => (
+                    <li key={idx}>{kw.keyword} ({kw.weight})</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <strong>Palabras clave del perfil:</strong>
+                <ul>
+                  {res.profileKeywords.map((kw, idx) => (
+                    <li key={idx}>{kw.keyword} ({kw.weight})</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <strong>Palabras frecuentes:</strong>
+                <ul>
+                  {res.frequentWords.map((kw, idx) => (
+                    <li key={idx}>{kw.keyword} ({kw.weight})</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>

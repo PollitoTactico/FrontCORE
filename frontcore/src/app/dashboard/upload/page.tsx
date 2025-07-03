@@ -59,9 +59,9 @@ export default function UploadPage() {
           required
           className="border p-2 w-full"
         />
-        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Subir PDF</button>
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Subir</button>
       </form>
-      {notification && <p className="mt-4 text-green-500">{notification}</p>}
+      {notification && <div className="mt-4 text-red-600">{notification}</div>}
     </div>
   );
 }
