@@ -29,8 +29,6 @@ export default function ComparePage() {
   const [result, setResult] = useState<ComparationResponse | null>(null);
   const [notification, setNotification] = useState("");
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -43,7 +41,7 @@ export default function ComparePage() {
 
     try {
       const response = await fetch(
-        `${apiUrl}/comparation/compare`,
+        'https://backendcrudapiservice20250420164400.azurewebsites.net/api/comparation/compare',
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
