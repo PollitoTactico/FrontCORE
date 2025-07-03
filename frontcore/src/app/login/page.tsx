@@ -23,7 +23,7 @@ export default function LoginPage() {
       localStorage.setItem('token', data.token);
       localStorage.setItem('email', email);
       setMessage('Inicio de sesión exitoso.');
-      window.location.href = '/profile'; // Redirigir al perfil de usuario
+      router.push('/(dashboard)/profile'); // Redirigir a la ruta correcta del perfil
     } else {
       setMessage('Credenciales incorrectas.');
     }
