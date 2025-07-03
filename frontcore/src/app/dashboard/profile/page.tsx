@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import AdminPanel from "@/components/AdminPanel";
 
 export default function ProfilePage() {
   const [formData, setFormData] = useState({
@@ -53,7 +52,6 @@ export default function ProfilePage() {
 
   return (
     <>
-      <AdminPanel />
       <div className="p-8 max-w-md mx-auto">
         <h2 className="text-2xl font-bold mb-4">Perfil de Usuario</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

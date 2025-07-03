@@ -15,10 +15,10 @@ export default function Sidebar() {
     <aside className="w-64 h-screen bg-gray-800 text-white p-4">
       <h2 className="text-2xl font-bold mb-6">Menú</h2>
       <nav className="space-y-2">
-        <Link href="/profile" className={linkStyle('/profile')}>Perfil de Usuario</Link>
-        <Link href="/upload" className={linkStyle('/upload')}>Carga de PDFs</Link>
-        <Link href="/compare" className={linkStyle('/compare')}>Comparación</Link>
-        <Link href="/crudprofile" className={linkStyle('/crudprofile')}>CRUDProfile</Link>
+        <Link href="/dashboard/profile" className={linkStyle('/dashboard/profile')}>Perfil de Usuario</Link>
+        <Link href="/dashboard/upload" className={linkStyle('/dashboard/upload')}>Carga de PDFs</Link>
+        <Link href="/dashboard/compare" className={linkStyle('/dashboard/compare')}>Comparación</Link>
+        <Link href="/dashboard/crudprofile" className={linkStyle('/dashboard/crudprofile')}>CRUDProfile</Link>
       </nav>
     </aside>
   );
