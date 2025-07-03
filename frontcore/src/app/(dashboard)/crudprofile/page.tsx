@@ -21,14 +21,17 @@ export default function CrudProfilePage() {
   const [notification, setNotification] = useState("");
   const [editingProfile, setEditingProfile] = useState<ProfileUser | null>(null);
 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     fetchProfiles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchProfiles = async () => {
     try {
       const response = await fetch(
-        "https://backendcrudapiservice20250420164400.azurewebsites.net/api/ProfileUser"
+        `${apiUrl}/ProfileUser`
       );
       const data: ProfileUser[] = await response.json();
       setProfiles(data);
@@ -40,7 +43,7 @@ export default function CrudProfilePage() {
   const handleDelete = async (id: number) => {
     try {
       const response = await fetch(
-        `https://backendcrudapiservice20250420164400.azurewebsites.net/api/ProfileUser/${id}`,
+        `${apiUrl}/ProfileUser/${id}`,
         {
           method: "DELETE",
         }
@@ -63,7 +66,7 @@ export default function CrudProfilePage() {
 
     try {
       const response = await fetch(
-        `https://backendcrudapiservice20250420164400.azurewebsites.net/api/ProfileUser/${editingProfile.id}`,
+        `${apiUrl}/ProfileUser/${editingProfile.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

@@ -6,6 +6,7 @@ export default function UploadPage() {
   const [file, setFile] = useState<File | null>(null);
   const [nombreCandidato, setNombreCandidato] = useState('');
   const [notification, setNotification] = useState('');
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +21,7 @@ export default function UploadPage() {
     formData.append('nombreCandidato', nombreCandidato);
 
     try {
-      const response = await fetch('https://backendcrudapiservice20250420164400.azurewebsites.net/api/PDF/upload', {
+      const response = await fetch(`${apiUrl}/PDF/upload`, {
         method: 'POST',
         body: formData,
       });
